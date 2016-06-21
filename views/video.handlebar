@@ -1,0 +1,12 @@
+<div id="categories">
+{{#each categories}}
+  <span>{{this}}</span>
+{{/each}}
+</div>
+  <article>
+  <amp-youtube
+    data-videoid="{{data.video_id}}"
+    layout="responsive"
+    width="480" height="270">
+</amp-youtube>
+  </article>

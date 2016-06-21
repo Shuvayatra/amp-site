@@ -1,0 +1,14 @@
+<div id="categories">
+{{#each categories}}
+  <span>{{this}}</span>
+{{/each}}
+</div>
+  <article>
+  <amp-audio width=400 height=50 src="{{data.media_url}}">
+  <div fallback>
+    <p>Your browser doesn’t support HTML5 audio</p>
+  </div>
+</amp-audio>
+
+
+  </article>
