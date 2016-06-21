@@ -1,13 +1,13 @@
 var Handlebars=require('handlebars');
 var HandlebarsIntl = require('handlebars-intl');
 HandlebarsIntl.registerWith(Handlebars);
-const PORT=9090;
+const PORT=443;;
 const fs = require('fs');
 const http2 = require('http2');
 var req = require('request');
 var options = {
-  key: fs.readFileSync('./certificates/local.thinkrooms.net.key'),
-  cert: fs.readFileSync('./certificates/local.thinkrooms.net.crt')
+  key: fs.readFileSync('/etc/letsencrypt/live/amp.shuvayatra.org/privkey.pem'),
+  cert: fs.readFileSync('/etc/letsencrypt/live/amp.shuvayatra.org/fullchain.pem')
 };
 
 var view=fs.readFileSync('views/index.handlebar','utf8');
@@ -31,6 +31,7 @@ http2.createServer(options, function(request, response) {
               token:'e9005151e1cb26445120f14e46ef07bbf5e6df93'
             }
           },(error, resp, body) =>{
+	    if(!error){
             var data=JSON.parse(body);
 
             switch (data.type) {
@@ -48,6 +49,10 @@ http2.createServer(options, function(request, response) {
             }
             data.published=new Date(data.created_at * 1000);
             response.end(template(data));
+		}
+		else{
+			console.log(error);
+		}
           });
 
     }
