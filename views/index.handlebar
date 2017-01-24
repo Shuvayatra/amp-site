@@ -5,6 +5,31 @@
     <title>{{title}}</title>
     <link rel="canonical" href="{{canonical_url}}" />
     <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+    <!-- Schema.org markup for Google+ -->
+    <meta itemprop="name" content="{{title}}">
+    <meta itemprop="description" content="{{desc}}">
+    <meta itemprop="image" content="{{leader}}">
+
+    <!-- Twitter Card data -->
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@amphtml">
+    <meta name="twitter:creator" content="@sebabenz">
+    <meta name="twitter:title" content="{{title}}">
+    <meta name="twitter:description" content="{{desc}}">
+    <meta name="twitter:image" content="{{logo}}">
+    <meta name="twitter:image:alt" content="AMP by Example">
+
+    <!-- Open Graph data -->
+    <meta property="fb:app_id" content="254325784911610" />
+    <meta property="og:title" content="{{title}}" />
+    <meta property="og:type" content="article" />
+    <meta property="og:image" content="{{leader}}" />
+    <meta property="og:url" content="{{canonical}}" />
+    <meta property="og:description" content="{{desc}}" />
+    <meta property="og:site_name" content="Shuvayatra" />
+    <meta property="article:published_time" content="{{published}}" />
+    <meta property="article:modified_time" content="{{modified}}" />
+
     <script type="application/ld+json">
       {
         "@context": "http://schema.org",

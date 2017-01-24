@@ -20,11 +20,8 @@ Handlebars.registerPartial('video',videoView);
 var template = Handlebars.compile(view);
 
 http.createServer( function(request, response) {
-    console.log(request.url);
     if(request.url.match(/^\/post/)){
-      console.log('handling post request');
       var params=request.url.split('/');
-      console.log(params);
         req({
             url:'http://api.shuvayatra.org/v1/api/posts/'+params[2],
           },(error, resp, body) =>{
@@ -48,7 +45,7 @@ http.createServer( function(request, response) {
 
             }
             data.published=new Date(data.created_at * 1000);
-            console.log(data.published);
+            data.modified=new Date(data.modified_at * 1000);
             data.canonical_url="https://app.shuvayatra.org/post/"+data.id;
             response.end(template(data));
 		}
