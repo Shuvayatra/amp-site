@@ -77,7 +77,7 @@
   </head>
   <body>
     <div id="header">
-      <h2><amp-img src="http://shuvayatra.org/img/logo-square.png" width="32" height="32" alt="शुभयात्रा"></amp-img> शुभयात्रा</h2>
+      <h2><amp-img src="//shuvayatra.org/img/logo-square.png" width="32" height="32" alt="शुभयात्रा"></amp-img> शुभयात्रा</h2>
     </div>
     <div id="container">
       <h1>{{title}}</h1>
