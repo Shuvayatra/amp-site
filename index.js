@@ -1,14 +1,14 @@
 var Handlebars=require('handlebars');
 var HandlebarsIntl = require('handlebars-intl');
 HandlebarsIntl.registerWith(Handlebars);
-const PORT=443;;
+const PORT=9090;;
 const fs = require('fs');
-const http2 = require('http2');
+const http = require('http');
 var req = require('request');
-var options = {
-  key: fs.readFileSync('/etc/letsencrypt/live/amp.shuvayatra.org/privkey.pem'),
-  cert: fs.readFileSync('/etc/letsencrypt/live/amp.shuvayatra.org/fullchain.pem')
-};
+//var options = {
+  //key: fs.readFileSync('/etc/letsencrypt/live/amp.shuvayatra.org/privkey.pem'),
+  //cert: fs.readFileSync('/etc/letsencrypt/live/amp.shuvayatra.org/fullchain.pem')
+//};
 
 var view=fs.readFileSync('views/index.handlebar','utf8');
 const articleView=fs.readFileSync('views/article.handlebar','utf8');
@@ -19,7 +19,7 @@ const videoView=fs.readFileSync('views/video.handlebar','utf8');
 Handlebars.registerPartial('video',videoView);
 var template = Handlebars.compile(view);
 
-http2.createServer(options, function(request, response) {
+http.createServer( function(request, response) {
     console.log(request.url);
     if(request.url.match(/^\/post/)){
       console.log('handling post request');
