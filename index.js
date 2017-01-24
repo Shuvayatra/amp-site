@@ -46,7 +46,9 @@ http.createServer( function(request, response) {
 
             }
             data.published=new Date(data.created_at * 1000);
+            data.published_iso=data.published.toISOString();
             data.modified=new Date(data.updated_at * 1000);
+            data.modified_iso=data.modified.toISOString();
             data.canonical_url="https://app.shuvayatra.org/post/"+data.id;
             data.amp_url="https://amp.shuvayatra.org/post/"+data.id;
             data.excerpt=striptags(data.description).substring(0,150);
