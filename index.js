@@ -1,13 +1,13 @@
 var Handlebars=require('handlebars');
 var HandlebarsIntl = require('handlebars-intl');
 HandlebarsIntl.registerWith(Handlebars);
-const PORT=9090;
+const PORT=443;;
 const fs = require('fs');
 const http2 = require('http2');
 var req = require('request');
 var options = {
-  key: fs.readFileSync('./certificates/local.thinkrooms.net.key'),
-  cert: fs.readFileSync('./certificates/local.thinkrooms.net.crt')
+  key: fs.readFileSync('/etc/letsencrypt/live/amp.shuvayatra.org/privkey.pem'),
+  cert: fs.readFileSync('/etc/letsencrypt/live/amp.shuvayatra.org/fullchain.pem')
 };
 
 var view=fs.readFileSync('views/index.handlebar','utf8');
@@ -28,6 +28,7 @@ http2.createServer(options, function(request, response) {
         req({
             url:'http://api.shuvayatra.org/v1/api/posts/'+params[2],
           },(error, resp, body) =>{
+	    if(!error){
             var data=JSON.parse(body);
 
             switch (data.type) {
@@ -50,6 +51,10 @@ http2.createServer(options, function(request, response) {
             console.log(data.published);
             data.canonical_url="https://app.shuvayatra.org/post/"+data.id;
             response.end(template(data));
+		}
+		else{
+			console.log(error);
+		}
           });
 
     }
