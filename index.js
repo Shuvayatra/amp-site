@@ -26,27 +26,29 @@ http2.createServer(options, function(request, response) {
       var params=request.url.split('/');
       console.log(params);
         req({
-            url:'http://api.shuvayatra.org/api/post/'+params[2],
-            headers:{
-              token:'e9005151e1cb26445120f14e46ef07bbf5e6df93'
-            }
+            url:'http://api.shuvayatra.org/v1/api/posts/'+params[2],
           },(error, resp, body) =>{
             var data=JSON.parse(body);
 
             switch (data.type) {
-                case 'article':
+                case 'text':
                   data.is_article=true;
+                  data.schemaType="NewsArticle";
                   break;
                 case 'audio':
                   data.is_audio=true;
+                  data.schemaType="AudioObject";
                   break;
                 case 'video':
                   data.is_video=true;
+                  data.schemaType="VideoObject";
                   data.data.video_id=YouTubeGetID(data.data.media_url);
                   break;
 
             }
             data.published=new Date(data.created_at * 1000);
+            console.log(data.published);
+            data.canonical_url="https://app.shuvayatra.org/post/"+data.id;
             response.end(template(data));
           });
 

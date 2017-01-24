@@ -4,7 +4,7 @@
 {{/each}}
 </div>
   <article>
-  <amp-audio width=400 height=50 src="{{data.media_url}}">
+  <amp-audio width="400" height="50" src="{{data.media_url}}">
   <div fallback>
     <p>Your browser doesn’t support HTML5 audio</p>
   </div>
