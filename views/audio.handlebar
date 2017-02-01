@@ -8,6 +8,9 @@
   <div fallback>
     <p>Your browser doesn’t support HTML5 audio</p>
   </div>
+  <div class="content">
+  	{{{description}}}
+  </div>
 </amp-audio>
 
 

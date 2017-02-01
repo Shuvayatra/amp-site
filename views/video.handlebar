@@ -4,9 +4,12 @@
 {{/each}}
 </div>
   <article>
-  <amp-youtube
+  	<amp-youtube
     data-videoid="{{data.video_id}}"
     layout="responsive"
     width="480" height="270">
-</amp-youtube>
+	</amp-youtube>
+	<div class="content">
+	{{{description}}}
+	</div>
   </article>

@@ -45,14 +45,25 @@ http.createServer( function(request, response) {
                   break;
 
             }
-            data.published=new Date(data.created_at * 1000);
-            data.published_iso=data.published.toISOString();
-            data.modified=new Date(data.updated_at * 1000);
-            data.modified_iso=data.modified.toISOString();
-            data.canonical_url="https://app.shuvayatra.org/post/"+data.id;
-            data.amp_url="https://amp.shuvayatra.org/post/"+data.id;
-            data.excerpt=striptags(data.description).substring(0,150);
-            response.end(template(data));
+            req({
+              url:'http://api.shuvayatra.org/v1/api/screens'
+            },(error, resp, body) =>{
+                if(!error){
+                  data.menu=JSON.parse(body);
+                  data.published=new Date(data.created_at * 1000);
+                  data.published_iso=data.published.toISOString();
+                  data.modified=new Date(data.updated_at * 1000);
+                  data.modified_iso=data.modified.toISOString();
+                  data.canonical_url="https://app.shuvayatra.org/post/"+data.id;
+                  data.amp_url="https://amp.shuvayatra.org/post/"+data.id;
+                  data.excerpt=striptags(data.description).substring(0,150);
+                  response.end(template(data));
+                } else{
+                  console.log(error);
+                }
+                
+            });
+            
 		}
 		else{
 			console.log(error);
