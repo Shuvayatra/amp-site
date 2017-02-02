@@ -161,9 +161,9 @@
     </div>
 
     <div id="socialshare">
-        <amp-social-share type="twitter" url="{{amp_url}}"></amp-social-share>
-        <amp-social-share type="facebook" data-param-app_id="552404564965262" href="{{amp_url}}"></amp-social-share>
-        <amp-social-share type="gplus" url="{{amp_url}}"></amp-social-share>
+        <amp-social-share type="twitter" data-param-url="{{amp_url}}"></amp-social-share>
+        <amp-social-share type="facebook" data-param-app_id="552404564965262" data-param-href="{{amp_url}}"></amp-social-share>
+        <amp-social-share type="gplus" data-param-url="{{amp_url}}"></amp-social-share>
         <amp-social-share type="whatsapp"
             data-share-endpoint="whatsapp://send"
             data-param-text="Check out this article: {{title}} - {{amp_url}}">
