@@ -61,11 +61,11 @@
       }
 
       body {
-        background-color: #547C8A;
+        background-color: #eeeeee;
       }
 
       header,footer{
-        background-color: black;
+        background-color: #27a8d8;
         color: white;
         line-height: 32px;
         padding:16px;
@@ -138,8 +138,8 @@
   </head>
   <body>
     <header>
-      <a href="http://app.shuvayatra.org">&#8592;</a>
-      <h2><amp-img src="//storage.googleapis.com/shuvayatra-assets/shuvayatra-logo-square.png" width="32" height="32" alt="शुभयात्रा"></amp-img>शुभयात्रा</h2>
+      <a href="https://app.shuvayatra.org">&#8592;</a>
+      <h2><amp-img src="//storage.googleapis.com/shuvayatra-assets/nav_logo.png" width="32" height="32" alt="शुभयात्रा"></amp-img>शुभयात्रा</h2>
     </header>
     <div id="container">
       <h1>{{title}}</h1>
