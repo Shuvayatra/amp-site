@@ -135,6 +135,7 @@
     {{/if}}
     <script async custom-element="amp-social-share" src="https://cdn.ampproject.org/v0/amp-social-share-0.1.js"></script>
     <script async custom-element="amp-install-serviceworker" src="https://cdn.ampproject.org/v0/amp-install-serviceworker-0.1.js"></script>
+    <script async custom-element="amp-analytics" src="https://cdn.ampproject.org/v0/amp-analytics-0.1.js"></script>
   </head>
   <body>
     <header>
@@ -175,6 +176,21 @@
   <footer>
     &copy; 2017 <a href="https://shuvayatra.org">Shuvayatra</a> 
   </footer>
+  <amp-analytics type="googleanalytics">
+    <script type="application/json">
+    {
+      "vars": {
+        "account": "UA-77878844-4"
+      },
+      "triggers": {
+        "trackPageview": {
+          "on": "visible",
+          "request": "pageview"
+        }
+      }
+    }
+    </script>
+  </amp-analytics>
   <amp-install-serviceworker src="/service-worker.js"
       data-iframe-src="https://app.shuvayatra.org/images/nav_logo.png"
       layout="nodisplay">
