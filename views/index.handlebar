@@ -96,7 +96,7 @@
         
       }
 
-      header a{
+      header #back{
         float: left;
         font-size: 2em;
       }
@@ -139,7 +139,7 @@
   </head>
   <body>
     <header>
-      <a href="https://shuvayatra.org">&#8592;</a>
+      <a id="back" href="https://shuvayatra.org">&#8592;</a>
       <h2><a href="https://shuvayatra.org"><amp-img src="//storage.googleapis.com/shuvayatra-assets/nav_logo.png" width="32" height="32" alt="शुभयात्रा"></amp-img>शुभयात्रा</a></h2>
     </header>
     <div id="container">
