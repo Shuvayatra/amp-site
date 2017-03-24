@@ -139,8 +139,8 @@
   </head>
   <body>
     <header>
-      <a href="https://app.shuvayatra.org">&#8592;</a>
-      <h2><amp-img src="//storage.googleapis.com/shuvayatra-assets/nav_logo.png" width="32" height="32" alt="शुभयात्रा"></amp-img>शुभयात्रा</h2>
+      <a href="https://shuvayatra.org">&#8592;</a>
+      <h2><a href="https://shuvayatra.org"><amp-img src="//storage.googleapis.com/shuvayatra-assets/nav_logo.png" width="32" height="32" alt="शुभयात्रा"></amp-img>शुभयात्रा</a></h2>
     </header>
     <div id="container">
       <h1>{{title}}</h1>
@@ -192,7 +192,7 @@
     </script>
   </amp-analytics>
   <amp-install-serviceworker src="/service-worker.js"
-      data-iframe-src="https://app.shuvayatra.org/images/nav_logo.png"
+      data-iframe-src="https://shuvayatra.org/images/nav_logo.png"
       layout="nodisplay">
     </amp-install-serviceworker>
   </body>
