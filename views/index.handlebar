@@ -127,6 +127,7 @@
         margin: 1em 0;
       }
       
+
       #related h3{
         padding: 0 16px;
       }
@@ -137,8 +138,9 @@
       }
 
       li{
-        margin-bottom: 0.5em;
+   
         background-color: #FFF;
+        margin:0 -16px 8px -16px;
       }
 
       li>a{
