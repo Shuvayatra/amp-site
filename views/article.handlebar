@@ -11,6 +11,6 @@ height="480">
   <span>{{this}}</span>
 {{/each}}
 </div>
-  <article>
-    {{{description}}}
-  </article>
+<article>
+{{{description}}}
+</article>

@@ -53,7 +53,7 @@
     <style amp-custom>
       /* any custom style goes here. */
       @media (min-width: 1024px){
-        #container,#header{
+        .container,#header,#related{
           width: 600px;
           margin:0 auto;
         }
@@ -101,7 +101,7 @@
         font-size: 2em;
       }
 
-      #container{
+      .container{
         padding: 16px;
         background-color: white;
       }
@@ -114,6 +114,7 @@
         margin:1.5em 0;
         text-align: center;
       }
+
       .cover-image{
         margin:1em -16px;
       }
@@ -125,7 +126,26 @@
       article{
         margin: 1em 0;
       }
+      
+      #related h3{
+        padding: 0 16px;
+      }
 
+      ul{
+        padding: 0;
+        list-style: none;
+      }
+
+      li{
+        margin-bottom: 0.5em;
+        background-color: #FFF;
+      }
+
+      li>a{
+        display: block;
+        width: 100%;
+        padding:16px;
+      }
     </style>
     <script async src="https://cdn.ampproject.org/v0.js"></script>
     {{#if is_audio}}
@@ -137,16 +157,18 @@
     <script async custom-element="amp-social-share" src="https://cdn.ampproject.org/v0/amp-social-share-0.1.js"></script>
     <script async custom-element="amp-install-serviceworker" src="https://cdn.ampproject.org/v0/amp-install-serviceworker-0.1.js"></script>
     <script async custom-element="amp-analytics" src="https://cdn.ampproject.org/v0/amp-analytics-0.1.js"></script>
-
+    <script async custom-element="amp-list" src="https://cdn.ampproject.org/v0/amp-list-0.1.js"></script>
   </head>
   <body>
     <header>
       <a id="back" href="https://shuvayatra.org">&#8592;</a>
       <h2><a href="https://shuvayatra.org"><amp-img src="//storage.googleapis.com/shuvayatra-assets/nav_logo.png" width="32" height="32" alt="शुभयात्रा"></amp-img>शुभयात्रा</a></h2>
     </header>
-    <div id="container">
+    <div class="container">
       <h1>{{title}}</h1>
-      <div id="date">{{formatDate published day="numeric" month="numeric" year="numeric"}}</div>
+      <div id="date">
+      {{formatDate published day="numeric" month="numeric" year="numeric"}}
+      </div>
       
       {{#if is_article}}
         {{> article}}
@@ -169,7 +191,18 @@
         </amp-social-share>
     </div>
     
-  </div>
+    <div id="related">
+      <h3>Related Posts</h3>
+      <ul>
+          {{#each similar_posts}}
+            <li>
+            <a href="{{this.share_url}}">
+              {{this.title}}
+            </a>
+            </li>
+          {{/each}}
+      </ul>
+    </div>
   <footer>
     &copy; 2017 <a href="https://shuvayatra.org">Shuvayatra</a> 
   </footer>
