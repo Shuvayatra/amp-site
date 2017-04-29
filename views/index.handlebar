@@ -75,7 +75,7 @@
         margin: 0;
       }
 
-      #date{
+      #date,#source{
         font-size: 0.8em;
         color:#666;
         margin: 1em 0;
@@ -132,18 +132,18 @@
         padding: 0 16px;
       }
 
-      ul{
+      #related ul{
         padding: 0;
         list-style: none;
       }
 
-      li{
+      #related li{
    
         background-color: #FFF;
         margin:0 -16px 8px -16px;
       }
 
-      li>a{
+      #related li>a{
         display: block;
         width: 100%;
         padding:16px;
@@ -181,8 +181,13 @@
       {{#if is_video}}
         {{> video}}
       {{/if}}
+      {{#if source}}
+        <div id="source">
+          Source : <a href="{{source_url}}">{{source}}</a>
+        </div>
+      {{/if}}
     </div>
-
+    
     <div id="socialshare">
         <amp-social-share type="twitter" data-param-url="{{amp_url}}"></amp-social-share>
         <amp-social-share type="facebook" data-param-app_id="552404564965262" data-param-href="{{amp_url}}"></amp-social-share>
@@ -192,7 +197,7 @@
             data-param-text="Check out this article: {{title}} - {{amp_url}}">
         </amp-social-share>
     </div>
-    
+    {{#if similar_posts}}
     <div id="related">
       <h3>Related Posts</h3>
       <ul>
@@ -205,6 +210,7 @@
           {{/each}}
       </ul>
     </div>
+    {{/if}}
   <footer>
     &copy; 2017 <a href="https://shuvayatra.org">Shuvayatra</a> 
   </footer>

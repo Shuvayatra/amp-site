@@ -6,6 +6,7 @@ const fs = require('fs');
 const http = require('http');
 var req = require('request');
 var striptags = require('striptags');
+var sanitizeHtml = require('sanitize-html');
 //var options = {
   //key: fs.readFileSync('/etc/letsencrypt/live/amp.shuvayatra.org/privkey.pem'),
   //cert: fs.readFileSync('/etc/letsencrypt/live/amp.shuvayatra.org/fullchain.pem')
@@ -49,6 +50,7 @@ http.createServer( function(request, response) {
               url:'http://api.shuvayatra.org/v1/api/screens'
             },(error, resp, body) =>{
                 if(!error){
+                  data.description=sanitizeHtml(data.description);
                   data.menu=JSON.parse(body);
                   data.published=new Date(data.created_at * 1000);
                   data.published_iso=data.published.toISOString();
