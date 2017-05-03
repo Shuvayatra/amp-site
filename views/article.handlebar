@@ -3,8 +3,9 @@ class="cover-image"
 src="{{featured_image}}"
 layout="responsive"
 alt="{{title}}"
-width="600"
-height="480">
+width="{{featured_image_info.width}}"
+height="{{featured_image_info.height}}">
+
 </amp-img>
 <div id="categories">
 {{#each categories}}

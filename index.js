@@ -1,12 +1,14 @@
 var Handlebars=require('handlebars');
 var HandlebarsIntl = require('handlebars-intl');
 HandlebarsIntl.registerWith(Handlebars);
-const PORT=9090;;
+const PORT=9090;
 const fs = require('fs');
 const http = require('http');
+var url = require('url');
 var req = require('request');
 var striptags = require('striptags');
 var sanitizeHtml = require('sanitize-html');
+var requestImageSize = require('request-image-size');
 //var options = {
   //key: fs.readFileSync('/etc/letsencrypt/live/amp.shuvayatra.org/privkey.pem'),
   //cert: fs.readFileSync('/etc/letsencrypt/live/amp.shuvayatra.org/fullchain.pem')
@@ -27,7 +29,7 @@ http.createServer( function(request, response) {
         req({
             url:'http://api.shuvayatra.org/v1/api/posts/'+params[2],
           },(error, resp, body) =>{
-	    if(!error){
+	         if(!error){
             var data=JSON.parse(body);
 
             switch (data.type) {
@@ -46,36 +48,55 @@ http.createServer( function(request, response) {
                   break;
 
             }
+
             req({
               url:'http://api.shuvayatra.org/v1/api/screens'
-            },(error, resp, body) =>{
+              },(error, resp, body) =>{
                 if(!error){
-                  data.description=sanitizeHtml(data.description);
-                  data.menu=JSON.parse(body);
-                  data.published=new Date(data.created_at * 1000);
-                  data.published_iso=data.published.toISOString();
-                  data.modified=new Date(data.updated_at * 1000);
-                  data.modified_iso=data.modified.toISOString();
-                  data.canonical_url="https://app.shuvayatra.org/post/"+data.id;
-                  data.amp_url="https://amp.shuvayatra.org/post/"+data.id;
-                  data.excerpt=striptags(data.description).substring(0,150);
-                  response.end(template(data));
+                  if(data.type!=='video'){
+                      requestImageSize(data.featured_image, function(err, size, downloaded) {
+ 
+                      if (err) {
+                        return console.error('An error has ocurred:', error);
+                      }
+                     
+                      if (!size) {
+                        return console.error('Could not get image size');
+                      }
+                      data.featured_image_info=size;
+                      data=formatData(data,body);
+                      response.end(template(data));
+                      });
+                  } else {
+                      data=formatData(data,body);
+                      response.end(template(data));
+                  }    
+                    
                 } else{
                   console.log(error);
                 }
                 
-            });
-            
-		}
-		else{
-			console.log(error);
-		}
           });
 
-    }
+      };
+    });
+  }
 
 }).listen(PORT);
 console.log('listening on '+PORT);
+
+function formatData(data,body){
+  data.description=sanitizeHtml(data.description);
+  data.menu=JSON.parse(body);
+  data.published=new Date(data.created_at * 1000);
+  data.published_iso=data.published.toISOString();
+  data.modified=new Date(data.updated_at * 1000);
+  data.modified_iso=data.modified.toISOString();
+  data.canonical_url="https://app.shuvayatra.org/post/"+data.id;
+  data.amp_url="https://amp.shuvayatra.org/post/"+data.id;
+  data.excerpt=striptags(data.description).substring(0,150);
+  return data;
+}
 
 function YouTubeGetID(url){
   var ID = '';
