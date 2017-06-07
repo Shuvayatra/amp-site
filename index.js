@@ -53,13 +53,13 @@ http.createServer( function(request, response) {
               url:'http://api.shuvayatra.org/v1/api/screens'
               },(error, resp, body) =>{
                 if(!error){
-                  if(data.type!=='video'){
+                  if(data.type!=='video' && data.featured_image!==null && data.featured_image!==''){
                       requestImageSize(data.featured_image, function(err, size, downloaded) {
- 
+
                       if (err) {
                         return console.error('An error has ocurred:', error);
                       }
-                     
+
                       if (!size) {
                         return console.error('Could not get image size');
                       }
@@ -70,12 +70,12 @@ http.createServer( function(request, response) {
                   } else {
                       data=formatData(data,body);
                       response.end(template(data));
-                  }    
-                    
+                  }
+
                 } else{
                   console.log(error);
                 }
-                
+
           });
 
       };
