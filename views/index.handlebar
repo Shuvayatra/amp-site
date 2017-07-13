@@ -68,7 +68,7 @@
         {{#if is_video}}
         "name": "{{title}}",
         "embedUrl": "{{data.media_url}}",
-        "thumbnailUrl": "{{data.thumbail}}",
+        "thumbnailUrl": "{{data.thumbnail}}",
         "uploadDate": "{{published}}",
         "description": "{{excerpt}}",
         "duration": "{{duration}}",
