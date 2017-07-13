@@ -45,24 +45,40 @@
       {
         "@context": "http://schema.org",
         "@type": "{{schemaType}}",
-        "headline": "{{title}}",
-        "datePublished": "{{published}}",
-        "dateModified": "{{modified}}",
-        "image": {
+        {{#if is_article}}
+          "headline": "{{title}}",
+          "datePublished": "{{published}}",
+          "dateModified": "{{modified}}",
+          "image": {
+            "@type": "ImageObject",
             "url": "{{featured_image}}",
             "height": "{{featured_image_info.height}}",
             "width": "{{featured_image_info.width}}"
-        },
+          },
+          "author": {
+            "@type": "Person",
+            "name": "Shuvayatra team"
+          },
+        {{/if}}
+        {{#if is_audio}}
+        "contentUrl": "{{data.media_url}}",
+        "uploadDate": "{{published}}",
+        "transcript": "{{{description}}}",
+        {{/if}}
+        {{#if is_video}}
+        "name": "{{title}}",
+        "embedUrl": "https://www.youtube.com/watch?v={{data.video_id}}",
+        "thumbnailUrl": "{{featured_image}}",
+        "description": "{{{description}}}",
+        {{/if}}
         "publisher": {
+          "@type": "Organization",
           "name": "शुभयात्रा",
           "logo": {
             "url": "https://shuvayatra.org/images/logo-amp.png",
             "height": "60",
             "width": "190"  
           }
-        },
-        "author": {
-          "name": "Shuvayatra team"
         },
         "mainEntityOfPage":"{{canonical_url}}"
       }
