@@ -71,7 +71,7 @@
         "thumbnailUrl": "{{data.thumbail}}",
         "uploadDate": "{{published}}",
         "description": "{{excerpt}}",
-        "duration": "{{duration}},
+        "duration": "{{duration}}",
         {{/if}}
         "publisher": {
           "@type": "Organization",
