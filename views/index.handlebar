@@ -63,7 +63,7 @@
         {{#if is_audio}}
         "contentUrl": "{{data.media_url}}",
         "uploadDate": "{{published}}",
-        "transcript": "{{{excerpt}}",
+        "transcript": "{{excerpt}}",
         {{/if}}
         {{#if is_video}}
         "name": "{{title}}",
