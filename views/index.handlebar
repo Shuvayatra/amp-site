@@ -75,6 +75,7 @@
           "@type": "Organization",
           "name": "शुभयात्रा",
           "logo": {
+            "@type": "ImageObject",
             "url": "https://shuvayatra.org/images/logo-amp.png",
             "height": "60",
             "width": "190"  
