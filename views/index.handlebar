@@ -63,13 +63,13 @@
         {{#if is_audio}}
         "contentUrl": "{{data.media_url}}",
         "uploadDate": "{{published}}",
-        "transcript": "{{{description}}}",
+        "transcript": "{{{excerpt}}",
         {{/if}}
         {{#if is_video}}
         "name": "{{title}}",
         "embedUrl": "https://www.youtube.com/watch?v={{data.video_id}}",
         "thumbnailUrl": "{{featured_image}}",
-        "description": "{{{description}}}",
+        "description": "{{{excerpt}}",
         {{/if}}
         "publisher": {
           "@type": "Organization",
