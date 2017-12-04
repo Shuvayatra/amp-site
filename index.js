@@ -24,37 +24,48 @@ Handlebars.registerPartial('video',videoView);
 var template = Handlebars.compile(view);
 
 http.createServer( function(request, response) {
+
     if(request.url.match(/^\/post/)){
-      var params=request.url.split('/');
+        var params=request.url.split('/');
+
         req({
-            url:'http://api.shuvayatra.org/v1/api/posts/'+params[2],
-          },(error, resp, body) =>{
-	         if(!error){
-            var data=JSON.parse(body);
 
-            switch (data.type) {
-                case 'text':
-                  data.is_article=true;
-                  data.schemaType="NewsArticle";
-                  break;
-                case 'audio':
-                  data.is_audio=true;
-                  data.schemaType="AudioObject";
-                  break;
-                case 'video':
-                  data.is_video=true;
-                  data.schemaType="VideoObject";
-                  data.data.video_id=YouTubeGetID(data.data.media_url);
-                  break;
+            // url:'https://raw.githubusercontent.com/aregmee/smart_test/master/index.html',
+            url:'https://api.shuvayatra.org/v1/api/posts/' + params[2],
+        },(error, resp, body) =>{
 
-            }
+            if(!error){
 
-            req({
-              url:'http://api.shuvayatra.org/v1/api/screens'
-              },(error, resp, body) =>{
-                if(!error){
-                  if(data.type!=='video' && data.featured_image!==null && data.featured_image!==''){
-                      requestImageSize(data.featured_image, function(err, size, downloaded) {
+                var data;
+
+                try{
+
+                    data = JSON.parse(body);
+                    switch (data.type) {
+                        case 'text':
+                            data.is_article=true;
+                            data.schemaType="NewsArticle";
+                            break;
+                        case 'audio':
+                            data.is_audio=true;
+                            data.schemaType="AudioObject";
+                            break;
+                        case 'video':
+                            data.is_video=true;
+                            data.schemaType="VideoObject";
+                            data.data.video_id=YouTubeGetID(data.data.media_url);
+                            break;
+                    }
+
+                    req({
+
+                        url:'http://api.shuvayatra.org/v1/api/screens'
+                    },(error, resp, body) =>{
+
+                        if(!error){
+
+                            if(data.type!=='video' && data.featured_image!==null && data.featured_image!==''){
+                                requestImageSize(data.featured_image, function(err, size, downloaded) {
 
                       if (err) {
                         return console.error('An error has ocurred:', error);
@@ -78,9 +89,23 @@ http.createServer( function(request, response) {
 
           });
 
-      };
-    });
-  }
+                }catch(e){
+
+                    data = JSON.parse('{}');
+                    data.created_at = new Date();
+                    data.updated_at = new Date();
+                    data.id = params[2];
+                    data = formatData(data, '{}');
+                    data.is_article=true;
+                    data.schemaType="NewsArticle";
+                    data.description = "Server has encountered an error";
+                    response.end(template(data));
+                    console.error('params[2] is : ' + params[2]);
+                    return console.error('An error has occurred:', e);
+                }
+            };
+        });
+    }
 
 }).listen(PORT);
 console.log('listening on '+PORT);

@@ -15,7 +15,8 @@
     <meta name="twitter:site" content="Shuvayatra">
     <meta name="twitter:title" content="{{title}}">
     <meta name="twitter:description" content="{{excerpt}}">
-    <meta name="twitter:image" content="{{featured_image}}">
+
+
     <meta name="twitter:image:alt" content="{{title}}">
 
     <!-- Open Graph data -->
@@ -100,6 +101,10 @@
       body {
         background-color: #eeeeee;
       }
+      td{
+        border: solid #000000 1px;
+               padding: 5px;
+      }
 
       header,footer{
         background-color: #27a8d8;
@@ -110,6 +115,9 @@
       }
       header h2{
         margin: 0;
+      }
+      #relatedPostCard{
+        padding: 10px;
       }
 
       #date,#source{
@@ -196,6 +204,7 @@
     <script async custom-element="amp-social-share" src="https://cdn.ampproject.org/v0/amp-social-share-0.1.js"></script>
     <script async custom-element="amp-install-serviceworker" src="https://cdn.ampproject.org/v0/amp-install-serviceworker-0.1.js"></script>
     <script async custom-element="amp-analytics" src="https://cdn.ampproject.org/v0/amp-analytics-0.1.js"></script>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" type="text/css"/>
     <script async custom-element="amp-list" src="https://cdn.ampproject.org/v0/amp-list-0.1.js"></script>
   </head>
   <body>
@@ -207,6 +216,8 @@
       <h1>{{title}}</h1>
       <div id="date">
       {{formatDate published day="numeric" month="numeric" year="numeric"}}
+      <span style="float:right;"> {{this.share_count}} share</span>
+      <span style="float:right;">{{this.like_count}} likes,</span>
       </div>
       
       {{#if is_article}}
@@ -237,11 +248,16 @@
     {{#if similar_posts}}
     <div id="related">
       <h3>Related Posts</h3>
-      <ul>
+      <ul id="relatedPostCard">
           {{#each similar_posts}}
-            <li>
+            <li style="padding:5px;">
             <a href="{{this.share_url}}">
-              {{this.title}}
+              <div>
+              <div style="text-align: center;">
+                <img src="{{this.featured_image}}" style="width:90%;"/>
+              </div>
+              <div style="padding-left: 30px;">{{this.title}}</div>
+
             </a>
             </li>
           {{/each}}

@@ -7,11 +7,6 @@ width="{{featured_image_info.width}}"
 height="{{featured_image_info.height}}">
 
 </amp-img>
-<div id="categories">
-{{#each categories}}
-  <span>{{this}}</span>
-{{/each}}
-</div>
 <article>
 {{{description}}}
 </article>
