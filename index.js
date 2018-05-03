@@ -111,7 +111,9 @@ http.createServer( function(request, response) {
 console.log('listening on '+PORT);
 
 function formatData(data,body){
-  data.description=sanitizeHtml(data.description);
+  data.description=sanitizeHtml(data.description, {
+      allowedTags: sanitizeHtml.defaults.allowedTags.concat([ 'img' ])
+  });
   data.menu=JSON.parse(body);
   data.published=new Date(data.created_at * 1000);
   data.published_iso=data.published.toISOString();
