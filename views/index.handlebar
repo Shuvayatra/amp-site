@@ -1,6 +1,6 @@
 <!doctype html>
 <html amp lang="en">
-  <head>
+<head>
     <meta charset="utf-8">
     <title>{{title}}</title>
     <link rel="canonical" href="{{canonical_url}}" />
@@ -35,7 +35,7 @@
     <meta property="og:type" content="video.other" />
     <meta property="og:video:secure_url" content="{{data.data.media_url}}" />
     {{/if}}
-    
+
     <meta property="og:image" content="{{featured_image}}" />
     <meta property="og:url" content="{{amp_url}}" />
     <meta property="og:description" content="{{excerpt}}" />
@@ -44,23 +44,23 @@
     <meta property="article:modified_time" content="{{modified_iso}}" />
 
     <script type="application/ld+json">
-      {
-        "@context": "http://schema.org",
-        "@type": "{{schemaType}}",
+        {
+            "@context": "http://schema.org",
+            "@type": "{{schemaType}}",
         {{#if is_article}}
-          "headline": "{{title}}",
-          "datePublished": "{{published}}",
-          "dateModified": "{{modified}}",
-          "image": {
-            "@type": "ImageObject",
-            "url": "{{featured_image}}",
-            "height": "{{featured_image_info.height}}",
-            "width": "{{featured_image_info.width}}"
-          },
-          "author": {
-            "@type": "Person",
-            "name": "Shuvayatra team"
-          },
+        "headline": "{{title}}",
+        "datePublished": "{{published}}",
+        "dateModified": "{{modified}}",
+        "image": {
+        "@type": "ImageObject",
+        "url": "{{featured_image}}",
+        "height": "{{featured_image_info.height}}",
+        "width": "{{featured_image_info.width}}"
+        },
+        "author": {
+        "@type": "Person",
+        "name": "Shuvayatra team"
+        },
         {{/if}}
         {{#if is_audio}}
         "contentUrl": "{{data.media_url}}",
@@ -76,124 +76,124 @@
         "duration": "{{duration}}",
         {{/if}}
         "publisher": {
-          "@type": "Organization",
-          "name": "शुभयात्रा",
-          "logo": {
-            "@type": "ImageObject",
-            "url": "https://shuvayatra.org/images/logo-amp.png",
-            "height": "60",
-            "width": "190"  
-          }
+        "@type": "Organization",
+        "name": "शुभयात्रा",
+        "logo": {
+        "@type": "ImageObject",
+        "url": "https://shuvayatra.org/images/logo-amp.png",
+        "height": "60",
+        "width": "190"
+        }
         },
         "mainEntityOfPage":"{{canonical_url}}"
-      }
+        }
     </script>
     <style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style><noscript><style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style></noscript>
     <style amp-custom>
-      /* any custom style goes here. */
-      @media (min-width: 1024px){
-        .container,#header,#related{
-          width: 600px;
-          margin:0 auto;
+        /* any custom style goes here. */
+        @media (min-width: 1024px){
+            .container,#header,#related{
+                width: 600px;
+                margin:0 auto;
+            }
+
         }
 
-      }
+        body {
+            background-color: #eeeeee;
+        }
+        td{
+            border: solid #000000 1px;
+            padding: 5px;
+        }
 
-      body {
-        background-color: #eeeeee;
-      }
-      td{
-        border: solid #000000 1px;
-               padding: 5px;
-      }
+        header,footer{
+            background-color: #27a8d8;
+            color: white;
+            line-height: 32px;
+            padding:16px;
+            text-align: center;
+        }
+        header h2{
+            margin: 0;
+        }
+        #relatedPostCard{
+            padding: 10px;
+        }
 
-      header,footer{
-        background-color: #27a8d8;
-        color: white;
-        line-height: 32px;
-        padding:16px;
-        text-align: center;
-      }
-      header h2{
-        margin: 0;
-      }
-      #relatedPostCard{
-        padding: 10px;
-      }
+        #date,#source{
+            font-size: 0.8em;
+            color:#666;
+            margin: 1em 0;
+            padding:1em 0;
+            border-top: 1px dotted #999;
+            border-bottom: 1px dotted #999;
+        }
 
-      #date,#source{
-        font-size: 0.8em;
-        color:#666;
-        margin: 1em 0;
-        padding:1em 0;
-        border-top: 1px dotted #999;
-        border-bottom: 1px dotted #999;
-      }
+        header amp-img{
+            display: inline-block;
+            margin-right: 1em;
+            vertical-align: top;
+        }
 
-      header amp-img{
-        display: inline-block;
-        margin-right: 1em;
-        vertical-align: top;
-      }
+        header a,footer a{
+            color: #fff;
+            text-decoration: none;
 
-      header a,footer a{
-        color: #fff;
-        text-decoration: none;
-        
-      }
+        }
 
-      header #back{
-        float: left;
-        font-size: 2em;
-      }
+        header #back{
+            float: left;
+            font-size: 2em;
+        }
 
-      .container{
-        padding: 16px;
-        background-color: white;
-      }
+        .container{
+            padding: 16px;
+            background-color: white;
+        }
 
-      #categories, #tags{
-        color:#666;
-        font-size: 0.9em;
-      }
-      #socialshare{
-        margin:1.5em 0;
-        text-align: center;
-      }
+        #categories, #tags{
+            color:#666;
+            font-size: 0.9em;
+        }
+        #socialshare{
+            margin:1.5em 0;
+            text-align: center;
+        }
 
-      .cover-image{
-        margin:1em -16px;
-      }
+        .cover-image{
+            margin:1em -16px;
+        }
 
-      amp-img.grey-placeholder {
-        background-color: grey;
-      }
+        amp-img.grey-placeholder {
+            background-color: grey;
+        }
 
-      article{
-        margin: 1em 0;
-      }
-      
+        article{
+            margin: 1em 0;
+        }
 
-      #related h3{
-        padding: 0 16px;
-      }
 
-      #related ul{
-        padding: 0;
-        list-style: none;
-      }
+        #related h3{
+            padding: 0 16px;
+        }
 
-      #related li{
-   
-        background-color: #FFF;
-        margin:0 -16px 8px -16px;
-      }
+        #related ul{
+            padding: 0;
+            list-style: none;
+        }
 
-      #related li>a{
-        display: block;
-        width: 100%;
-        padding:16px;
-      }
+        #related li{
+
+            background-color: #FFF;
+            margin:0 -16px 8px -16px;
+        }
+
+        #related li>a{
+            display: block;
+            width: 100%;
+            padding:16px;
+        }
     </style>
     <script async src="https://cdn.ampproject.org/v0.js"></script>
     {{#if is_audio}}
@@ -207,85 +207,88 @@
     <script async custom-element="amp-analytics" src="https://cdn.ampproject.org/v0/amp-analytics-0.1.js"></script>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" type="text/css"/>
     <script async custom-element="amp-list" src="https://cdn.ampproject.org/v0/amp-list-0.1.js"></script>
-  </head>
-  <body>
-    <header>
-      <a id="back" href="https://shuvayatra.org">&#8592;</a>
-      <h2><a href="https://shuvayatra.org"><amp-img src="//storage.googleapis.com/shuvayatra-assets/nav_logo.png" width="32" height="32" alt="शुभयात्रा"></amp-img>शुभयात्रा</a></h2>
-    </header>
-    <div class="container">
-      <h1>{{title}}</h1>
-      <div id="date">
-      {{formatDate published day="numeric" month="numeric" year="numeric"}}
-      <span style="float:right;"> {{this.share_count}} share</span>
-      <span style="float:right;">{{this.like_count}} likes,</span>
-      </div>
-      
-      {{#if is_article}}
-        {{> article}}
-      {{/if}}
-      {{#if is_audio}}
-        {{> audio}}
-      {{/if}}
-      {{#if is_video}}
-        {{> video}}
-      {{/if}}
-      {{#if source}}
-        <div id="source">
-          Source : <a href="{{source_url}}">{{source}}</a>
-        </div>
-      {{/if}}
+</head>
+<body>
+<header>
+    <a id="back" href="https://shuvayatra.org">&#8592;</a>
+    <h2><a href="https://shuvayatra.org"><amp-img src="//storage.googleapis.com/shuvayatra-assets/nav_logo.png" width="32" height="32" alt="शुभयात्रा"></amp-img>शुभयात्रा</a></h2>
+</header>
+<div class="container">
+    <h1>{{title}}</h1>
+    <div id="date">
+        {{formatDate published day="numeric" month="numeric" year="numeric"}}
+        <span style="float:right;"> {{this.share_count}} share</span>
+        <span style="float:right;">{{this.like_count}} likes,</span>
     </div>
-    
-    <div id="socialshare">
-        <amp-social-share type="twitter" data-param-url="{{amp_url}}"></amp-social-share>
-        <amp-social-share type="facebook" data-param-app_id="552404564965262" data-param-href="{{amp_url}}"></amp-social-share>
-        <amp-social-share type="gplus" data-param-url="{{amp_url}}"></amp-social-share>
-        <amp-social-share type="whatsapp"
-            data-share-endpoint="whatsapp://send"
-            data-param-text="Check out this article: {{title}} - {{amp_url}}">
-        </amp-social-share>
-    </div>
-    {{#if similar_posts}}
-    <div id="related">
-      <h3>Related Posts</h3>
-      <ul id="relatedPostCard">
-          {{#each similar_posts}}
-            <li style="padding:5px;">
-            <a href="{{this.share_url}}">
-              <div>
-              <div style="text-align: center;">
-                <img src="{{this.featured_image}}" style="width:90%;"/>
-              </div>
-              <div style="padding-left: 30px;">{{this.title}}</div>
 
-            </a>
-            </li>
-          {{/each}}
-      </ul>
+    {{#if is_article}}
+    {{> article}}
+    {{/if}}
+    {{#if is_audio}}
+    {{> audio}}
+    {{/if}}
+    {{#if is_video}}
+    {{> video}}
+    {{/if}}
+    {{#if source}}
+    <div id="source">
+        Source : <a href="{{source_url}}">{{source}}</a>
     </div>
     {{/if}}
-  <footer>
-    &copy; 2017 <a href="https://shuvayatra.org">Shuvayatra</a> 
-  </footer>
-  <amp-analytics type="googleanalytics">
+</div>
+
+<div id="socialshare">
+    <amp-social-share type="twitter" data-param-url="{{amp_url}}"></amp-social-share>
+    <amp-social-share type="facebook" data-param-app_id="552404564965262" data-param-href="{{amp_url}}"></amp-social-share>
+    <amp-social-share type="gplus" data-param-url="{{amp_url}}"></amp-social-share>
+    <amp-social-share type="whatsapp"
+                      data-share-endpoint="whatsapp://send"
+                      data-param-text="Check out this article: {{title}} - {{amp_url}}">
+    </amp-social-share>
+</div>
+{{#if similar_posts}}
+<div id="related">
+    <h3>Related Posts</h3>
+    <ul id="relatedPostCard">
+        {{#each similar_posts}}
+        <li style="padding:5px;">
+            <a href="{{this.share_url}}">
+                <div>
+                    <div style="text-align: center;">
+                        <img src="{{this.featured_image}}" style="width:90%;"/>
+                    </div>
+                    <div style="padding-left: 30px;">{{this.title}}</div>
+                </div>
+            </a>
+        </li>
+    </ul>
+</div>
+</li>
+{{/each}}
+</ul>
+</div>
+{{/if}}
+<footer>
+    &copy; 2017 <a href="https://shuvayatra.org">Shuvayatra</a>
+</footer>
+<amp-analytics type="googleanalytics">
     <script type="application/json">
-    {
-      "vars": {
-        "account": "UA-77878844-4"
-      },
-      "triggers": {
-        "trackPageview": {
-          "on": "visible",
-          "request": "pageview"
+        {
+            "vars": {
+                "account": "UA-77878844-4"
+            },
+            "triggers": {
+                "trackPageview": {
+                    "on": "visible",
+                    "request": "pageview"
+                }
+            }
         }
-      }
-    }
     </script>
-  </amp-analytics>
-  <amp-install-serviceworker src="/service-worker.js"
-      data-iframe-src="https://shuvayatra.org/sw.html"
-      layout="nodisplay">
-    </amp-install-serviceworker>
-  </body>
+</amp-analytics>
+<amp-install-serviceworker src="/service-worker.js"
+                           data-iframe-src="https://shuvayatra.org/sw.html"
+                           layout="nodisplay">
+</amp-install-serviceworker>
+</body>
 </html>
