@@ -10,110 +10,97 @@ var striptags = require('striptags');
 var sanitizeHtml = require('sanitize-html');
 var requestImageSize = require('request-image-size');
 //var options = {
-  //key: fs.readFileSync('/etc/letsencrypt/live/amp.shuvayatra.org/privkey.pem'),
-  //cert: fs.readFileSync('/etc/letsencrypt/live/amp.shuvayatra.org/fullchain.pem')
+//key: fs.readFileSync('/etc/letsencrypt/live/amp.shuvayatra.org/privkey.pem'),
+//cert: fs.readFileSync('/etc/letsencrypt/live/amp.shuvayatra.org/fullchain.pem')
 //};
 
-var view=fs.readFileSync('views/index.handlebar','utf8');
-const articleView=fs.readFileSync('views/article.handlebar','utf8');
+var view=fs.readFileSync(__dirname + '/views/index.handlebar','utf8');
+const articleView=fs.readFileSync(__dirname + '/views/article.handlebar','utf8');
 Handlebars.registerPartial('article',articleView);
-const audioView=fs.readFileSync('views/audio.handlebar','utf8');
+const audioView=fs.readFileSync(__dirname + '/views/audio.handlebar','utf8');
 Handlebars.registerPartial('audio',audioView);
-const videoView=fs.readFileSync('views/video.handlebar','utf8');
+const videoView=fs.readFileSync(__dirname + '/views/video.handlebar','utf8');
 Handlebars.registerPartial('video',videoView);
 var template = Handlebars.compile(view);
 
 http.createServer( function(request, response) {
+  if(request.url.match(/^\/post/)){
+    var params=request.url.split('/');
+    req({
+      url:'http://api.shuvayatra.org/v1/api/posts/'+params[2],
+    },(error, resp, body) =>{
+      if(!error){
+        var data;
+        try {
+          data = JSON.parse(body);
+          switch (data.type) {
+            case 'text':
+              data.is_article=true;
+              data.schemaType="NewsArticle";
+              break;
+            case 'audio':
+              data.is_audio=true;
+              data.schemaType="AudioObject";
+              break;
+            case 'video':
+              data.is_video=true;
+              data.schemaType="VideoObject";
+              data.data.video_id=YouTubeGetID(data.data.media_url);
+              break;
 
-    if(request.url.match(/^\/post/)){
-        var params=request.url.split('/');
+          }
 
-        req({
-
-            // url:'https://raw.githubusercontent.com/aregmee/smart_test/master/index.html',
-            url:'https://api.shuvayatra.org/v1/api/posts/' + params[2],
-        },(error, resp, body) =>{
-
+          req({
+            url:'http://api.shuvayatra.org/v1/api/screens'
+          },(error, resp, body) =>{
             if(!error){
+              if(data.type!=='video' && data.featured_image!==null && data.featured_image!==''){
+                requestImageSize(data.featured_image, function(err, size, downloaded) {
 
-                var data;
-
-                try{
-
-                    data = JSON.parse(body);
-                    switch (data.type) {
-                        case 'text':
-                            data.is_article=true;
-                            data.schemaType="NewsArticle";
-                            break;
-                        case 'audio':
-                            data.is_audio=true;
-                            data.schemaType="AudioObject";
-                            break;
-                        case 'video':
-                            data.is_video=true;
-                            data.schemaType="VideoObject";
-                            data.data.video_id=YouTubeGetID(data.data.media_url);
-                            break;
-                    }
-
-                    req({
-
-                        url:'http://api.shuvayatra.org/v1/api/screens'
-                    },(error, resp, body) =>{
-
-                        if(!error){
-
-                            if(data.type!=='video' && data.featured_image!==null && data.featured_image!==''){
-                                requestImageSize(data.featured_image, function(err, size, downloaded) {
-
-                      if (err) {
-                        return console.error('An error has ocurred:', error);
-                      }
-
-                      if (!size) {
-                        return console.error('Could not get image size');
-                      }
-                      data.featured_image_info=size;
-                      data=formatData(data,body);
-                      response.end(template(data));
-                      });
-                  } else {
-                      data=formatData(data,body);
-                      response.end(template(data));
+                  if (err) {
+                    return console.error('An error has ocurred:', error);
                   }
 
-                } else{
-                  console.log(error);
-                }
+                  if (!size) {
+                    return console.error('Could not get image size');
+                  }
+                  data.featured_image_info=size;
+                  data=formatData(data,body);
+                  response.end(template(data));
+                });
+              } else {
+                data=formatData(data,body);
+                response.end(template(data));
+              }
+
+            } else{
+              console.log(error);
+            }
 
           });
+        }catch (e){
 
-                }catch(e){
-
-                    data = JSON.parse('{}');
-                    data.created_at = new Date();
-                    data.updated_at = new Date();
-                    data.id = params[2];
-                    data = formatData(data, '{}');
-                    data.is_article=true;
-                    data.schemaType="NewsArticle";
-                    data.description = "Server has encountered an error";
-                    response.end(template(data));
-                    console.error('params[2] is : ' + params[2]);
-                    return console.error('An error has occurred:', e);
-                }
-            };
-        });
-    }
+          data = JSON.parse('{}');
+          data.created_at = new Date();
+          data.updated_at = new Date();
+          data.id = params[2];
+          data = formatData(data, '{}');
+          data.is_article=true;
+          data.schemaType="NewsArticle";
+          data.description = "Server has encountered an error";
+          response.end(template(data));
+          console.error('params[2] is : ' + params[2]);
+          return console.error('An error has occurred:', e);
+        }
+      };
+    });
+  }
 
 }).listen(PORT);
 console.log('listening on '+PORT);
 
 function formatData(data,body){
-  data.description=sanitizeHtml(data.description, {
-      allowedTags: sanitizeHtml.defaults.allowedTags.concat([ 'img' ])
-  });
+//  data.description=sanitizeHtml(data.description);
   data.menu=JSON.parse(body);
   data.published=new Date(data.created_at * 1000);
   data.published_iso=data.published.toISOString();
@@ -135,5 +122,5 @@ function YouTubeGetID(url){
   else {
     ID = url;
   }
-    return ID;
+  return ID;
 }
